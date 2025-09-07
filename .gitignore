@@ -1,0 +1,10 @@
+# Artifacts
+/target
+/dist
+
+
+# Here, we want to ignore all the actual files in our secret folder, but we want to
+# Keep the directories and `gitkeep` files.
+/.secret/**
+!/.secret/**/
+!/.secret/**/.gitkeep

@@ -1,0 +1,56 @@
+[package]
+name = "glados"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+authors.workspace = true
+description.workspace = true
+
+[dependencies]
+clap = { workspace = true, features = ["derive"] }
+tokio = { workspace = true, features = ["full"] }
+reqwest = { workspace = true }
+anyhow = { workspace = true }
+bytes = { workspace = true }
+zip = { workspace = true }
+maud = { workspace = true }
+grass = { workspace = true }
+lightningcss = { workspace = true }
+
+[workspace]
+members = []
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+publish = false
+authors = ["Hera Chamorro <hera@hera.wtf>"]
+description = "Static site generator for my blog."
+
+[workspace.dependencies]
+clap = "4.5.47"
+tokio = "1.47.1"
+bytes = "1.10.1"
+gix = "0.73.0"
+reqwest = { version = "0.12.23", default-features = false, features = [
+    "charset",
+    "http2",
+    "system-proxy",
+    "json",
+    "rustls-tls",
+] }
+axum = "0.8.4"
+url = "2.5.7"
+thiserror = "2.0.16"
+anyhow = "1.0.99"
+serde = "1.0.219"
+serde_json = "1.0.143"
+toml = "0.9.5"
+maud = "0.27.0"
+grass = "0.13.4"
+lightningcss = "1.0.0-alpha.67"
+chrono = "0.4.41"
+jotdown = "0.8.1"
+# octocrab = "0.44.1"
+zip = "5.0.0"
