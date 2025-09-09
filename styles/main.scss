@@ -1,5 +1,5 @@
-@import "fonts";
+@import "_fonts.scss";
 
 body {
-    font-family: "Berkeley Mono";
+    font-family: "Berkeley Mono", "Courier New", Courier, monospace;
 }

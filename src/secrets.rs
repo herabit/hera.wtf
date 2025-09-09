@@ -8,7 +8,7 @@ use std::{
 };
 
 use anyhow::{Context, bail, ensure};
-use bytes::{Buf, BufMut, Bytes, BytesMut};
+use bytes::{BufMut, Bytes, BytesMut};
 use reqwest::Client;
 use zip::ZipArchive;
 

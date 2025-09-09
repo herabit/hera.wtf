@@ -14,8 +14,12 @@ anyhow = { workspace = true }
 bytes = { workspace = true }
 zip = { workspace = true }
 maud = { workspace = true }
-grass = { workspace = true }
+grass = { workspace = true, features = ["macro"] }
 lightningcss = { workspace = true }
+serde = { workspace = true }
+chrono = { workspace = true, features = ["serde", "now"] }
+url = { workspace = true, features = ["serde"] }
+axum = { workspace = true }
 
 [workspace]
 members = []
