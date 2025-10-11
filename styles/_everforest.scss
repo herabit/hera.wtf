@@ -1,0 +1,46 @@
+// Thank you `sainnhe` for this wonderful theme.
+
+@use "everforest/light";
+@use "everforest/dark";
+@use "sass:map";
+@use "sass:color";
+
+@each $mode in ("light", "dark") {
+    $bg_hard: null;
+    $bg_medium: null;
+    $bg_soft: null;
+    $fg: null;
+
+    @if $mode == "light" {
+        $bg_hard: light.$bg_hard;
+        $bg_medium: light.$bg_medium;
+        $bg_soft: light.$bg_soft;
+        $fg: light.$fg;
+    } @else if $mode == "dark" {
+        $bg_hard: dark.$bg_hard;
+        $bg_medium: dark.$bg_medium;
+        $bg_soft: dark.$bg_soft;
+        $fg: dark.$fg;
+    }
+
+    @each $variant in ("hard", "medium", "soft") {
+        $bg: null;
+
+        @if $variant == "hard" {
+            $bg: $bg_hard;
+        } @else if $variant == "medium" {
+            $bg: $bg_medium;
+        } @else if $variant == "soft" {
+            $bg: $bg_soft;
+        }
+
+        .theme-ef-#{$mode}-#{$variant} {
+            --bg: #{map.get($bg, 0)};
+            --bg-dim: #{map.get($bg, dim)};
+            --fg: #{map.get($fg, default)};
+            --link: #{map.get($fg, blue)};
+            --link-hover: #{map.get($fg, red)};
+            --link-active: #{map.get(map.get($fg, grey), 0)};
+        }
+    }
+}

@@ -1,7 +1,7 @@
 use std::borrow::Cow;
 
 use chrono::{DateTime, Utc};
-use maud::{Markup, PreEscaped, Render, html};
+use maud::{html, Markup, PreEscaped, Render};
 use serde::{Deserialize, Serialize};
 use url::Url;
 
@@ -157,40 +157,47 @@ impl Render for Head {
                 // TODO: OpenGraph Image
                 (self.og_type)
 
-                // Preload stuff
-                link
-                    rel = "preload"
-                    href = "/styles/main.css"
-                    as="style"
-                    type="mime/css"
-                    crossorigin = "anonymous";
-                link
-                    rel = "preload"
-                    href = "/static/fonts/berkeley-mono/regular.woff2"
-                    as = "font"
-                    type = "font/woff2"
-                    crossorigin = "anonymous";
+                // // Preload stuff
+                // link
+                //     rel = "preload"
+                //     href = "/styles/main.css"
+                //     as="style"
+                //     type="mime/css"
+                //     crossorigin = "anonymous";
+                // link
+                //     rel = "preload"
+                //     href = "/static/fonts/berkeley-mono/regular.woff2"
+                //     as = "font"
+                //     type = "font/woff2"
+                //     crossorigin = "anonymous";
+
+                // link
+                //     rel = "preload"
+                //     href = "/static/fonts/berkeley-mono/bold.woff2"
+                //     as = "font"
+                //     type = "font/woff2"
+                //     crossorigin = "anonymous";
+
+                // link
+                //     rel = "preload"
+                //     href = "/static/fonts/berkeley-mono/italic.woff2"
+                //     as = "font"
+                //     type = "font/woff2"
+                //     crossorigin = "anonymous";
+
+                // link
+                //     rel = "preload"
+                //     href = "/static/fonts/berkeley-mono/bold-italic.woff2"
+                //     as = "font"
+                //     type = "font/woff2"
+                //     crossorigin = "anonymous";
 
                 link
-                    rel = "preload"
-                    href = "/static/fonts/berkeley-mono/bold.woff2"
-                    as = "font"
-                    type = "font/woff2"
-                    crossorigin = "anonymous";
-
-                link
-                    rel = "preload"
-                    href = "/static/fonts/berkeley-mono/italic.woff2"
-                    as = "font"
-                    type = "font/woff2"
-                    crossorigin = "anonymous";
-
-                link
-                    rel = "preload"
-                    href = "/static/fonts/berkeley-mono/bold-italic.woff2"
-                    as = "font"
-                    type = "font/woff2"
-                    crossorigin = "anonymous";
+                    rel = "stylesheet"
+                    href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+                    integrity = "sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+                    crossorigin = "anonymous"
+                    referrerpolicy = "no-referrer";
 
                 // Style stuff
                 link

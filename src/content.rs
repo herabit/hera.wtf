@@ -8,7 +8,9 @@ pub mod head;
 pub fn hello_world() -> maud::Markup {
     maud::html! {
         (maud::DOCTYPE)
-        html lang = "en" {
+        html
+            lang = "en"
+        {
             (head::Head {
                 title: "Hello, World!".into(),
                 description: "Lol".into(),
@@ -30,7 +32,9 @@ pub fn hello_world() -> maud::Markup {
                 }
             })
 
-            body {
+            body
+                class = "theme-ef-dark-hard"
+            {
                 h1 {
                     "Hello, World!"
                 }
@@ -48,6 +52,12 @@ pub fn hello_world() -> maud::Markup {
 
                     "Little do they know that's actually quite apt of an assertion."
                 }
+
+                a href="https://github.com/herabit/" {
+                    i class = "fa-brands fa-github" {}
+                    "My Github"
+                }
+                br;
             }
         }
     }

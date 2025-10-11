@@ -10,16 +10,10 @@ use tokio::net::TcpListener;
 
 pub mod build;
 pub mod content;
-pub mod secrets;
 pub mod util;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    // let secrets = secrets::get_secrets().await?;
-    // secrets::install_secrets(".secret".as_ref(), secrets.iter()).await?;
-
-    // build::copy_files(".secret".as_ref(), ".secret-2".as_ref()).await?;
-
     let app = Router::new()
         .route("/", get(async || Html(content::hello_world().0)))
         .route(
@@ -27,18 +21,18 @@ async fn main() -> anyhow::Result<()> {
             get(async |Path(font): Path<String>| {
                 let data: Option<&[u8]> = match font.as_str() {
                     "regular.woff2" => Some(include_bytes!(
-                        "../.secret/static/fonts/berkeley-mono/regular.woff2"
+                        "../static/fonts/berkeley-mono/regular.woff2"
                     )),
-                    "bold.woff2" => Some(include_bytes!(
-                        "../.secret/static/fonts/berkeley-mono/bold.woff2"
-                    )),
+                    "bold.woff2" => {
+                        Some(include_bytes!("../static/fonts/berkeley-mono/bold.woff2"))
+                    }
 
                     "italic.woff2" => Some(include_bytes!(
-                        "../.secret/static/fonts/berkeley-mono/regular.woff2"
+                        "../static/fonts/berkeley-mono/regular.woff2"
                     )),
-                    "bold-italic.woff2" => Some(include_bytes!(
-                        "../.secret/static/fonts/berkeley-mono/bold.woff2"
-                    )),
+                    "bold-italic.woff2" => {
+                        Some(include_bytes!("../static/fonts/berkeley-mono/bold.woff2"))
+                    }
                     _ => None,
                 };
 

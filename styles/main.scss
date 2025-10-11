@@ -1,5 +1,12 @@
-@import "_fonts.scss";
+@use "fonts";
+@use "colors";
 
 body {
     font-family: "Berkeley Mono", "Courier New", Courier, monospace;
+    background-color: var(--bg);
+    color: var(--fg);
+}
+
+a {
+    color: var(--link);
 }

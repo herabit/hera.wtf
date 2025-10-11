@@ -1,0 +1,68 @@
+$bg_hard: (
+    dim: #1e2326,
+    0: #272e33,
+    1: #2e383c,
+    2: #374145,
+    3: #414b50,
+    4: #495156,
+    5: #4f5b58,
+    visual: #4c3743,
+    red: #493b40,
+    green: #3c4841,
+    blue: #384b55,
+    yellow: #45443c,
+    purple: #463f48,
+);
+
+$bg_medium: (
+    dim: #233a2e,
+    0: #2d353b,
+    1: #343f44,
+    2: #3d484d,
+    3: #475258,
+    4: #4f585e,
+    5: #56635f,
+    visual: #543a48,
+    red: #514045,
+    green: #425047,
+    blue: #3a515d,
+    yellow: #4d4c43,
+    purple: #4a444e,
+);
+
+$bg_soft: (
+    dim: #293136,
+    0: #333c43,
+    1: #3a464c,
+    2: #434f55,
+    3: #4d5960,
+    4: #555f66,
+    5: #5d6b66,
+    visual: #5c3f4f,
+    red: #59464c,
+    green: #48584e,
+    blue: #3f5865,
+    yellow: #55544a,
+    purple: #434953,
+);
+
+$fg: (
+    default: #d3c6aa,
+    red: #e67e80,
+    orange: #e69875,
+    yellow: #dbbc7f,
+    green: #a7c080,
+    aqua: #83c092,
+    blue: #7fbbb3,
+    purple: #d699b6,
+    grey: (
+        0: #7a8478,
+        1: #859289,
+        2: #9da9a0,
+    ),
+    statusline: (
+        1: #a7c080,
+        2: #d3c6aa,
+        3: #e67e80,
+    ),
+);
