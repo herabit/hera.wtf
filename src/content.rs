@@ -1,8 +1,7 @@
-use chrono::{DateTime, Utc};
+use chrono::Utc;
+use head::{OgProfile, OgType};
 
-use crate::content::head::{OgProfile, OgType};
-
-pub mod djot;
+/// Stuff for generating head stuff.
 pub mod head;
 
 pub fn hello_world() -> maud::Markup {
@@ -11,13 +10,15 @@ pub fn hello_world() -> maud::Markup {
         html
             lang = "en"
         {
-            (head::Head {
+            @let now = Utc::now();
+            (
+            head::Head {
                 title: "Hello, World!".into(),
                 description: "Lol".into(),
                 url: "https://hera.wtf/".try_into().unwrap(),
                 og_type: OgType::Article {
-                    published: Some(Utc::now()),
-                    modified: Some(Utc::now()),
+                    published: Some(now),
+                    modified: Some(now),
                     expiration: None,
                     section: None,
                     author: vec![
@@ -53,10 +54,6 @@ pub fn hello_world() -> maud::Markup {
                     "Little do they know that's actually quite apt of an assertion."
                 }
 
-                a href="https://github.com/herabit/" {
-                    i class = "fa-brands fa-github" {}
-                    "My Github"
-                }
                 br;
             }
         }
