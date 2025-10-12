@@ -1,6 +1,8 @@
 use chrono::Utc;
 use head::{OgProfile, OgType};
 
+/// Process front matter.
+pub mod front_matter;
 /// Stuff for generating head stuff.
 pub mod head;
 
