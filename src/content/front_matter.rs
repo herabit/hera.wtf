@@ -1,5 +1,3 @@
-use anyhow::Context;
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct FrontMatter<'a> {
     /// The matter that was read from the frontmatter.
@@ -11,6 +9,7 @@ pub struct FrontMatter<'a> {
 }
 
 impl<'a> FrontMatter<'a> {
+    /// Extracts the front matter from a provided string.
     pub fn parse(input: &'a str) -> Result<Self, &'static str> {
         // NOTE: `\r` is handled by the later `language.trim()`.
         let (start, input) = input.split_once("\n").unwrap_or((input, ""));
@@ -19,10 +18,9 @@ impl<'a> FrontMatter<'a> {
             return Err("no marker");
         };
 
-        let (marker, language) = start.split_at_checked(marker_len).ok_or("invalid marker")?;
-        let language = match language.trim() {
-            "" => None,
-            language => Some(language),
+        let (marker, language) = match start.split_at_checked(marker_len).ok_or("invalid marker")? {
+            (marker, "") => (marker, None),
+            (marker, language) => (marker, Some(language)),
         };
 
         let (content, rest) = input

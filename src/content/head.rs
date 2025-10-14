@@ -1,7 +1,5 @@
-use std::borrow::Cow;
-
 use chrono::{DateTime, Utc};
-use maud::{html, Markup, PreEscaped, Render};
+use maud::{Markup, Render, html};
 use serde::{Deserialize, Serialize};
 use url::Url;
 

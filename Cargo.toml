@@ -20,9 +20,10 @@ serde = { workspace = true }
 chrono = { workspace = true, features = ["serde", "now"] }
 url = { workspace = true, features = ["serde"] }
 axum = { workspace = true }
+glados-highlight = { path = "crates/highlight" }
 
 [workspace]
-members = []
+members = ["crates/highlight"]
 resolver = "3"
 
 [workspace.package]
