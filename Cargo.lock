@@ -801,6 +801,7 @@ dependencies = [
  "clap",
  "glados-highlight",
  "grass",
+ "jotdown",
  "lightningcss",
  "maud",
  "reqwest",
@@ -1290,6 +1291,12 @@ dependencies = [
  "getrandom 0.3.3",
  "libc",
 ]
+
+[[package]]
+name = "jotdown"
+version = "0.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "824098f6c7b5b1e8061c22fe336547033ccb716265f5fa0ece623287aced0eb9"
 
 [[package]]
 name = "js-sys"

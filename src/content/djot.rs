@@ -1,4 +1,7 @@
-// #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-// pub struct Djot<T: ?Sized>(pub T);
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
+pub struct Djot<T: ?Sized>(pub T);
 
-// fn render_djot(djot: &)
+// pub fn render_djot(djot: &str, output: &mut String) {
+//     let mut events = jotdown::
+// }
