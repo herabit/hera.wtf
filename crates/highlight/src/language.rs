@@ -146,7 +146,7 @@ lang! {
 
        /// Tree sitter grammar for C#.
        Csharp {
-           name: "c-sharp" | "c_sharp" | "csharp" | "c#",
+           name: "csharp" | "c-sharp" | "c_sharp" | "c#",
            func: ::tree_sitter_c_sharp::LANGUAGE,
            // highlights: include_str!("./queries/c_sharp/highlights.scm"),
            // tags: include_str!("./queries/c_sharp/tags.scm"),
@@ -217,7 +217,7 @@ lang! {
 
        /// Tree sitter grammar for F#.
        Fsharp {
-           name: "f-sharp" | "f_sharp" | "fsharp" | "f#",
+           name: "fsharp" | "f-sharp" | "f_sharp" | "f#",
            func: ::tree_sitter_fsharp::LANGUAGE_FSHARP,
            highlights: ::tree_sitter_fsharp::HIGHLIGHTS_QUERY,
            locals: ::tree_sitter_fsharp::LOCALS_QUERY,
