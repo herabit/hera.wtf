@@ -16,3 +16,9 @@ The source code for my site.
 * Possibly compile posts to PDFs, utilizing typst... This is not a priority, but would be nice to have.
 * Figure out a reasonable reason why the blogging tool is named `glados` and not something more, well, clever. Our current excuse is
   ***Segmentation fault***.
+
+## On Bevy
+
+We figured that utilizing a game engine, or rather the guts of a game engine, would be an interesting approach to
+solving the design problems within the Static Site Generator space. We'll see where this goes, so far, it looks
+promising.

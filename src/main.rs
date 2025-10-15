@@ -1,19 +1,24 @@
+use bevy::{
+    app::{App, Startup},
+    ecs::schedule::IntoScheduleConfigs,
+};
+
 pub mod content;
 
-pub fn main() -> anyhow::Result<()> {
-    let mut langs = glados_highlight::language::Lang::ALL
-        .iter()
-        .copied()
-        .collect::<Vec<_>>();
-
-    langs.sort_by_key(|l| l.func().into_raw());
-
-    langs.iter().for_each(|lang| {
-        println!(
-            "{}: {:p}",
-            lang.names().first().copied().unwrap_or("{UNKNOWN}"),
-            lang.func().into_raw()
+pub fn main() {
+    App::new()
+        .insert_resource(content::SearchPath(".".into()))
+        .add_systems(
+            Startup,
+            (content::find_pages, content::read_page_contents).chain(),
         )
-    });
-    Ok(())
+        .run();
 }
+
+// #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Component)]
+// pub struct Page;
+
+// #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Component)]
+// pub struct SourcePath(pub PathBuf);
+
+// // #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Component)]
