@@ -12,8 +12,6 @@ use bevy::ecs::{
     resource::Resource,
     system::{Commands, Query, Res},
 };
-use chrono::Utc;
-use head::{OgProfile, OgType};
 
 /// Stuff for rendering djot.
 pub mod djot;
@@ -62,34 +60,24 @@ pub fn read_page_contents(
         let contents = std::fs::read_to_string(&**path)
             .with_context(|| format!("reading {:?}", path.display()))?;
 
-        println!("{:?}", path.display());
-
         commands.entity(entity).insert(InputContents(contents));
     }
 
     Ok(())
 }
 
+/// Marker component for pages.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Component)]
 pub struct Page;
 
+/// A resource containing the path to start searching for pages in.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Resource)]
 pub struct SearchPath(pub PathBuf);
 
+/// The path to the input file for a page.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Component)]
 pub struct InputPath(pub PathBuf);
 
+/// The contents of the input file for a page.
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Component)]
 pub struct InputContents(pub String);
-
-// #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Component)]
-// pub struct Title(pub String);
-
-// #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Component)]
-// pub struct Description(pub String);
-
-// #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Resource)]
-// pub struct SeriesMap()
-
-// #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Component)]
-// pub struct Series(pub Entity);

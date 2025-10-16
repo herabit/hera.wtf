@@ -12,7 +12,6 @@ tokio = { workspace = true, features = ["full"] }
 reqwest = { workspace = true }
 anyhow = { workspace = true }
 bytes = { workspace = true }
-zip = { workspace = true }
 maud = { workspace = true }
 grass = { workspace = true, features = ["macro"] }
 lightningcss = { workspace = true }
@@ -60,5 +59,3 @@ grass = "0.13.4"
 lightningcss = "1.0.0-alpha.67"
 chrono = "0.4.41"
 jotdown = "0.8.1"
-# octocrab = "0.44.1"
-zip = "5.0.0"
