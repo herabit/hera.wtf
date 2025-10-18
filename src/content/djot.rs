@@ -1,9 +1,19 @@
-// pub struct Djot<T: ?Sized>(pub T);
+// use std::borrow::Cow;
 
-// pub fn render_djot(djot: &str, output: &mut String) {
-//     let mut events = jotdown::Parser::new(djot);
-
-//     for event in &mut events {
-//         event;
-//     }
+// pub trait EventTypes {
+//     type Math<'a>
+//     where
+//         Self: 'a;
 // }
+
+// impl EventTypes for () {
+//     type Math<'a> = Cow<'a, str>;
+// }
+
+use std::borrow::Cow;
+
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub enum Math {
+    Inline(Cow<'static, str>),
+    Block(Cow<'static, str>),
+}

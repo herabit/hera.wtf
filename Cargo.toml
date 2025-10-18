@@ -22,7 +22,13 @@ axum = { workspace = true }
 jotdown = { workspace = true }
 toml = { workspace = true, features = ["serde"] }
 glados-highlight = { path = "crates/highlight" }
-bevy = { version = "0.17.2", default-features = false, features = ["debug", "bevy_state", "multi_threaded", "bevy_log", "std"] }
+bevy = { version = "0.17.2", default-features = false, features = [
+  "debug",
+  "bevy_state",
+  "multi_threaded",
+  "bevy_log",
+  "std",
+] }
 
 [workspace]
 members = ["crates/highlight"]
@@ -41,11 +47,11 @@ tokio = "1.47.1"
 bytes = "1.10.1"
 gix = "0.73.0"
 reqwest = { version = "0.12.23", default-features = false, features = [
-    "charset",
-    "http2",
-    "system-proxy",
-    "json",
-    "rustls-tls",
+  "charset",
+  "http2",
+  "system-proxy",
+  "json",
+  "rustls-tls",
 ] }
 axum = "0.8.4"
 url = "2.5.7"
@@ -59,3 +65,4 @@ grass = "0.13.4"
 lightningcss = "1.0.0-alpha.67"
 chrono = "0.4.41"
 jotdown = "0.8.1"
+

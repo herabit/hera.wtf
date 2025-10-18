@@ -50,7 +50,7 @@ impl<'a> FrontMatter<'a> {
                 Some((content, rest))
             })
             .next()
-            .ok_or("failed to find end marker")?;
+            .ok_or("no marker")?;
 
         Ok(Self {
             content,
