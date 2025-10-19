@@ -17,7 +17,8 @@ pub fn main() {
                 content::page::find,
                 content::page::read,
                 content::page::load_matter,
-                content::page::print_titles,
+                content::page::parse_djot,
+                content::page::print_djot,
             )
                 .chain(),
         )

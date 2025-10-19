@@ -6,8 +6,8 @@ use std::{
 
 use bevy::ecs::component::Component;
 
-// /// Stuff for rendering djot.
-// pub mod djot;
+/// Stuff for rendering djot.
+pub mod djot;
 /// process front matter.
 pub mod front_matter;
 // /// Stuff for generating head stuff.
