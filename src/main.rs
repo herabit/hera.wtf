@@ -1,26 +1,38 @@
-use bevy::{
+use ::bevy::{
     app::{App, Startup},
-    ecs::schedule::IntoScheduleConfigs,
+    ecs::{component::Component, resource::Resource, schedule::IntoScheduleConfigs},
 };
-
-/// Tools relating to content.
-pub mod content;
+use chrono::{DateTime, Local};
 
 /// Tools for Bevy.
-pub mod bevy_util;
+pub mod bevy;
+/// Tools relating to content.
+pub mod content;
+/// Tools for typst.
+pub mod typst;
 
 pub fn main() {
     App::new()
+        .init_resource::<Now>()
         .add_systems(
             Startup,
             (
                 content::page::find,
                 content::page::read,
                 content::page::load_matter,
-                content::page::parse_djot,
-                content::page::print_djot,
+                content::djot::parse_events,
             )
                 .chain(),
         )
         .run();
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Component, Resource)]
+pub struct Now(pub DateTime<Local>);
+
+impl Default for Now {
+    #[inline]
+    fn default() -> Self {
+        Now(Local::now())
+    }
 }

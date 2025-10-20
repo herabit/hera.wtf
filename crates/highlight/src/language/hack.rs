@@ -49,8 +49,8 @@ pub const unsafe fn receive_lemons<F: LangFunc>(_: F) -> LanguageFn {
         assert!(
             size_of::<F>() == 0,
             "lang funcs need to be zero sized so that we don't get uninitialized data",
-        );
-    }
+        )
+    };
 
     /// GET MAD! I DON'T WANT YOUR DAMN LEMONS, WHAT AM I SUPPOSED TO DO WITH THESE? DEMAND TO
     /// SEE LIFE's MANAGER! MAKE LIFE RUE THE DAY IT THOUGHT IT COULD GIVE [HERA] LEMONS! DO YOU

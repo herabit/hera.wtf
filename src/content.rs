@@ -10,8 +10,8 @@ use bevy::ecs::component::Component;
 pub mod djot;
 /// process front matter.
 pub mod front_matter;
-// /// Stuff for generating head stuff.
-// pub mod head;
+/// Stuff for handling math.
+pub mod math;
 /// Stuff for pages.
 pub mod page;
 
@@ -26,6 +26,10 @@ impl<T: Sized + 'static> Content for T {
 
 impl<T: Sized + 'static + Clone> Content for [T] {
     type Output = Cow<'static, [T]>;
+}
+
+impl Content for str {
+    type Output = Cow<'static, str>;
 }
 
 impl Content for Path {

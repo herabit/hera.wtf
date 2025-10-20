@@ -22,13 +22,15 @@ axum = { workspace = true }
 jotdown = { workspace = true }
 toml = { workspace = true, features = ["serde"] }
 glados-highlight = { path = "crates/highlight" }
-bevy = { version = "0.17.2", default-features = false, features = [
+bevy = { workspace = true, features = [
   "debug",
   "bevy_state",
   "multi_threaded",
   "bevy_log",
   "std",
 ] }
+typst = { workspace = true }
+typst-svg = { workspace = true }
 
 [workspace]
 members = ["crates/highlight"]
@@ -64,12 +66,7 @@ maud = "0.27.0"
 grass = "0.13.4"
 lightningcss = "1.0.0-alpha.67"
 chrono = "0.4.41"
-
-# IF YOU CHANGE THE SEMVER VERSION, NEW YORK CITY, ET. AL, WILL BE NUKED.
-#
-# MILLIONS WILL DIE OF UNDEFINED BEHAVIOR, OR, RATHER, EVEN MORE UNDEFINED
-# BEHAVIOR.
-#
-# WE WILL ALL DIE.
-jotdown = "=0.8.1"
-
+jotdown = "0.8.1"
+bevy = { "version" = "0.17.2", default-features = false }
+typst = "0.14.0-rc.2"
+typst-svg = "0.14.0-rc.2"

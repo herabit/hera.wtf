@@ -12,12 +12,11 @@ use bevy::ecs::{
     system::{Commands, Query},
 };
 
-use jotdown::{Event, Parser};
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    bevy_util::EntityCommandsExt as _,
-    content::{Input, djot::to_static, front_matter::FrontMatter},
+    bevy::EntityCommandsExt as _,
+    content::{Input, front_matter::FrontMatter},
 };
 
 /// A struct for storing the metadata for pages.
@@ -185,35 +184,4 @@ pub fn load_matter(
     }
 
     Ok(())
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Default, Component)]
-pub struct DjotEvents(pub Vec<Event<'static>>);
-
-pub fn parse_djot(
-    query: Query<(Entity, &Input<String>, &PageOffset), (With<Page>, Changed<Input<String>>)>,
-    mut commands: Commands,
-) {
-    for (entity, Input(contents), &PageOffset(offset)) in query {
-        let Some(contents) = contents.get(offset..) else {
-            continue;
-        };
-
-        let events = Parser::new(contents)
-            .skip_while(|event| matches!(event, Event::Blankline))
-            .map(to_static::event)
-            .collect();
-
-        commands.entity(entity).insert(DjotEvents(events));
-    }
-}
-
-pub fn print_djot(query: Query<&DjotEvents>) {
-    for DjotEvents(events) in query {
-        for event in events {
-            println!("{event:?}");
-        }
-
-        println!();
-    }
 }
