@@ -70,3 +70,9 @@ jotdown = "0.8.1"
 bevy = { "version" = "0.17.2", default-features = false }
 typst = "0.14.0-rc.2"
 typst-svg = "0.14.0-rc.2"
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
