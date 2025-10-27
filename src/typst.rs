@@ -1,45 +1,104 @@
 use chrono::{DateTime, Datelike, FixedOffset, Local, Timelike, Utc};
+use parking_lot::{MappedMutexGuard as MappedGuard, Mutex, MutexGuard};
+use std::{
+    borrow::Cow,
+    collections::{HashMap, hash_map::Entry},
+    fs,
+    io::ErrorKind,
+    path::{Path, PathBuf},
+    str::Utf8Error,
+};
 use typst::{
     Library, World,
-    diag::FileResult,
-    foundations::{Bytes, Datetime as TypstDateTime},
+    diag::{FileError, FileResult},
+    ecow::EcoString,
+    foundations::{Bytes, Datetime as TypstDateTime, Repr},
     syntax::{FileId, Source},
     text::{Font, FontBook},
     utils::LazyHash,
 };
+use typst_kit::{download::ProgressSink, fonts::FontSlot, package::PackageStorage};
 
 /// Our world thingy for typst.
-#[derive(Clone)]
 pub struct Elysium {
+    pub root: Cow<'static, Path>,
     pub now: DateTime<Utc>,
     pub library: LazyHash<Library>,
-    pub fonts: LazyHash<FontBook>,
     pub main: FileId,
+    pub fonts: Vec<FontSlot>,
+    pub font_book: LazyHash<FontBook>,
+    pub files: Mutex<HashMap<FileId, FileResult<FileData>>>,
+    pub packages: PackageStorage,
+}
+
+impl Elysium {
+    pub fn resolve(&self, id: FileId) -> FileResult<PathBuf> {
+        let root = id
+            .package()
+            .map(|spec| self.packages.prepare_package(spec, &mut ProgressSink))
+            .transpose()?;
+
+        let root = root.as_deref().unwrap_or(&self.root);
+
+        id.vpath().resolve(root).ok_or(FileError::AccessDenied)
+    }
+
+    #[unsafe(no_mangle)]
+    pub fn load(&self, id: FileId) -> MappedGuard<'_, FileResult<FileData>> {
+        // NOTE: Is this too nested? Yes. Do I care? Not at fucking all.
+        MutexGuard::map(self.files.lock(), |files| match files.entry(id) {
+            Entry::Occupied(entry) => entry.into_mut(),
+            Entry::Vacant(entry) => entry.insert(
+                self.resolve(id)
+                    .and_then(|path| {
+                        fs::read(&*path).map_err(|err| {
+                            if err.kind() == ErrorKind::IsADirectory {
+                                FileError::IsDirectory
+                            } else {
+                                FileError::from_io(err, &*path)
+                            }
+                        })
+                    })
+                    .map(|data| match String::from_utf8(data) {
+                        Ok(string) => FileData::String(string),
+                        Err(err) => FileData::Bytes(err.into_bytes()),
+                    }),
+            ),
+        })
+    }
 }
 
 impl World for Elysium {
     fn library(&self) -> &LazyHash<Library> {
-        todo!()
+        &self.library
     }
 
     fn book(&self) -> &LazyHash<FontBook> {
-        todo!()
+        &self.font_book
     }
 
     fn main(&self) -> FileId {
-        todo!()
+        self.main
     }
 
     fn source(&self, id: FileId) -> FileResult<Source> {
-        todo!()
+        match &*self.load(id) {
+            Ok(FileData::String(text)) => Ok(Source::new(id, text.clone())),
+            Ok(FileData::Bytes(..)) => Err(FileError::InvalidUtf8),
+            Err(err) => Err(err.clone()),
+        }
     }
 
     fn file(&self, id: FileId) -> FileResult<Bytes> {
-        todo!()
+        match &*self.load(id) {
+            Ok(FileData::String(text)) => Ok(Bytes::from_string(text.clone())),
+            Ok(FileData::Bytes(bytes)) => Ok(Bytes::new(bytes.clone())),
+            Err(err) => Err(err.clone()),
+        }
     }
 
     fn font(&self, index: usize) -> Option<Font> {
-        todo!()
+        self.fonts.get(index).and_then(FontSlot::get)
     }
 
     fn today(&self, offset: Option<i64>) -> Option<TypstDateTime> {
@@ -61,5 +120,22 @@ impl World for Elysium {
             now.minute().try_into().ok()?,
             now.second().try_into().ok()?,
         )
+    }
+}
+
+/// File data schenanigans.
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub enum FileData {
+    String(String),
+    Bytes(Vec<u8>),
+}
+
+impl FileData {
+    #[inline]
+    pub const fn as_str(&self) -> Result<&str, Utf8Error> {
+        match self {
+            FileData::String(string) => Ok(string.as_str()),
+            FileData::Bytes(bytes) => todo!(),
+        }
     }
 }

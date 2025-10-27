@@ -2,7 +2,7 @@ use ::bevy::{
     app::{App, Startup},
     ecs::{component::Component, resource::Resource, schedule::IntoScheduleConfigs},
 };
-use chrono::{DateTime, Local};
+use chrono::{DateTime, Utc};
 
 /// Tools for Bevy.
 pub mod bevy;
@@ -28,11 +28,11 @@ pub fn main() {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Component, Resource)]
-pub struct Now(pub DateTime<Local>);
+pub struct Now(pub DateTime<Utc>);
 
 impl Default for Now {
     #[inline]
     fn default() -> Self {
-        Now(Local::now())
+        Now(Utc::now())
     }
 }
