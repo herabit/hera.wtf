@@ -31,7 +31,7 @@ bevy = { workspace = true, features = [
 ] }
 typst = { workspace = true }
 typst-svg = { workspace = true }
-typst-kit = { workspace = true }
+typst-kit = { workspace = true, features = ["embed-fonts"] }
 parking_lot = { workspace = true }
 
 [workspace]
