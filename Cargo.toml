@@ -28,6 +28,7 @@ bevy = { workspace = true, features = [
   "multi_threaded",
   "bevy_log",
   "std",
+  "bevy_asset",
 ] }
 typst = { workspace = true }
 typst-svg = { workspace = true }

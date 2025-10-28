@@ -10,6 +10,8 @@ pub mod bevy;
 pub mod content;
 /// Tools for typst.
 pub mod typst;
+/// Utilities.
+pub mod util;
 
 pub fn main() {
     App::new()
